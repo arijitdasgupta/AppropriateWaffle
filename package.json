@@ -1,0 +1,22 @@
+{
+  "name": "appropriatewaffle",
+  "version": "1.0.0",
+  "description": "A matrix operation tool",
+  "main": "./dist/main.js",
+  "scripts": {
+    "start": "ts-node ./src/main.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^8.0.8",
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.29",
+    "nodemon": "^1.11.0",
+    "readline": "^1.3.0",
+    "rx-node": "^1.0.2",
+    "rxjs": "^5.4.2",
+    "ts-node": "^3.2.0",
+    "typescript": "^2.4.1"
+  }
+}
