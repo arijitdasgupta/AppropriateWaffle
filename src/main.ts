@@ -40,7 +40,7 @@ class OutputWriteStream {
 
         console.log(`Writing to ${this.outputFilename}`);
 
-        this.fileWriteStream = fs.createWriteStream(this.outputFilename, {flags: 'a'});
+        this.fileWriteStream = fs.createWriteStream(this.outputFilename);
 
         this.keyValueStream = Rx.Observable.create((observer) => {
             this.outputPushCallback = (data:IFinalOutput) => {
@@ -61,9 +61,15 @@ class OutputWriteStream {
 
         const outputStream = keys.concatMap((data) => {
             const listOfKeys = data.map(item => item.key);
+            const listOfFirstValues = data.map(item => item.value);
 
-            return rows.map(data => {
-                return data.map(item => item.value)
+            return Rx.Observable.of(listOfFirstValues).concatMap(_ => {
+                return rows.map(data => {
+                    //One line array coming
+                    return listOfKeys.map(key => {
+                        return data.filter(kvPair => kvPair.key === key)[0].value;
+                    });
+                });
             }).startWith(listOfKeys);
         })
         .map((stringCells:string[]) => {

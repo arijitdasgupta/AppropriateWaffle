@@ -1,7 +1,7 @@
 {
   "name": "appropriatewaffle",
   "version": "1.0.0",
-  "description": "A matrix operation tool",
+  "description": "A matrix operation tool over files",
   "main": "./dist/main.js",
   "scripts": {
     "start": "ts-node ./src/main.ts"

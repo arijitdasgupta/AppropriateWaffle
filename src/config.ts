@@ -41,26 +41,27 @@ export const vectorFileSpecifications:IVectorFileSpecification[] = [
     {
         filename: './data/zip_bg_lat_lon.csv',
         propsToTake: [
-            'zip4',
-            'Lon1',
-            'Lat1',
-            'blkgrp'
+            'Field1',
+            'Field2',
+            'Field2',
+            'Field4'
         ]
     },
     {
         filename: './data/SF_NPL_new.csv',
         propsToTake: [
-            'SiteID',
-            'EPAID',
-            'Zip',
-            'NPL_date',
-            'NPL_year',
-            'Latitude',
-            'Longitude'
+            'Field5',
+            'Field6',
+            'Field7',
+            'Field8',
+            'Field9',
+            'Field10',
+            'Field11'
         ]
     }
 ];
 
+// You would need to configure it appropriately...
 export const operationalConfiguration:IOperationConfiguration = {
     calculationMap: (object:any, callback:TOperationCallback) => {
         const { Lon1, Lat1, Latitude, Longitude } = object;
@@ -105,8 +106,7 @@ export const operationalConfiguration:IOperationConfiguration = {
         callback({distance, zone});
     },
     filter: (data) => {
-        // return !!data.zone;
-        return true;
+        return !!data.zone;
     },
     outputMap: (data) => {
         return [{
