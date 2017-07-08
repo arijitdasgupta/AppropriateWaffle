@@ -6,7 +6,7 @@ import {
 
 export const vectorFileSpecifications:IVectorFileSpecification[] = [
     {
-        filename: './data/zip_bg_lat_lon.csv',
+        filename: './data/file1.csv',
         propsToTake: [
             'Field1',
             'Field2',
@@ -15,7 +15,7 @@ export const vectorFileSpecifications:IVectorFileSpecification[] = [
         ]
     },
     {
-        filename: './data/SF_NPL_new.csv',
+        filename: './data/file2.csv',
         propsToTake: [
             'Field5',
             'Field6',
