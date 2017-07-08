@@ -1,13 +1,13 @@
 {
   "name": "appropriatewaffle",
   "version": "1.0.0",
-  "description": "A matrix operation tool over files",
+  "description": "A matrix operation tool over running over files",
   "main": "./dist/main.js",
   "scripts": {
     "start": "ts-node ./src/main.ts"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Arijit Dasgupta <arijit.rivalslayer@gmail.com",
+  "license": "MIT",
   "dependencies": {
     "@types/node": "^8.0.8",
     "lodash": "^4.17.4",
