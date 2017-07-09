@@ -7,7 +7,10 @@ import {
     IVectorFileSpecification, IOutputRawData, IOutKeyValPair, IFinalOutput
 } from '../interfaces/IConfigInterfaces';
 
-export class OutputWriteStream { 
+/**
+ * Writes out to CSV.
+ */
+export class OutputWriteStreamWrapper { 
     private outputFilename:string;
     private keyValueStream: Rx.Observable<IOutKeyValPair[]>;
     private fileWriteStream: stream.Writable;
@@ -15,7 +18,7 @@ export class OutputWriteStream {
     public outputPushCallback: (any) => void;
 
     constructor(readStreamDataList:IVectorFileSpecification[], outputDirectory: string) {
-        // the output filename is only UNIX compatible, won't work on Windows
+        // the output filename is only UNIX compatible, won't work on Windows, TODO
         this.outputFilename = readStreamDataList.map(fileReadData => {
             const withoutDirectory = fileReadData.filename
               .split('/')[fileReadData.filename.split('/').length - 1];
@@ -53,7 +56,7 @@ export class OutputWriteStream {
 
             return Rx.Observable.of(listOfFirstValues).concatMap(_ => {
                 return rows.map(data => {
-                    //One line array coming
+                    //One line array coming, sequenced values going...
                     return listOfKeys.map(key => {
                         return data.filter(kvPair => kvPair.key === key)[0].value;
                     });
@@ -72,7 +75,7 @@ export class OutputWriteStream {
         });
     }
 
-    end = () => {
+    end = ():void => {
         this.fileWriteStream.end();
     }
 

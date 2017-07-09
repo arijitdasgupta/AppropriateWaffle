@@ -1,7 +1,9 @@
 import * as Rx from 'rxjs';
 import * as _ from 'lodash';
 
-export const mapToObjectFromCsv = (stream:Rx.Observable<string>, propsToTake: string[]):Rx.Observable<any> => {
+export const transformToObjectFromCsvLineStream = (stream:Rx.Observable<string>, 
+  propsToTake: string[]):Rx.Observable<any> => {
+    
   const header = stream.take(1);
   const rows = stream.skip(1);
 
