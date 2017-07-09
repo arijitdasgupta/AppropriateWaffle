@@ -59,9 +59,9 @@ const loadedReadStreams = _.map(readStreams, stream => stream.loaded);
 
 Promise.all(loadedReadStreams).then(_ => {
     const outputStream = new OutputWriteStreamWrapper(
-    config.vectorFileSpecifications, config.outputDirectory);
+      config.vectorFileSpecifications, config.outputDirectory);
     const mainLoop = new MainLoop(readStreams, 
-    config.operationalConfiguration, outputStream);
+      config.operationalConfiguration, outputStream);
 
     // The start
     mainLoop.start().then(_ => {
