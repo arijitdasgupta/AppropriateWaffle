@@ -27,12 +27,12 @@ export class Config {
 
         this.operationalConfiguration = {
             calculationMap: (new Function(
-                'object', 
-                'callback', 
+                'object', // The raw CSV object merged
+                'callback', // Call on each operation after done
                 configurationObject.operationConfiguration.calculationMap)).bind(this) as TOperation,
-            filter: (new Function('data',
+            filter: (new Function('data', // Callback arg object from the calculationMap
                 configurationObject.operationConfiguration.filter)).bind(this) as TFilter,
-            outputMap: (new Function('data',
+            outputMap: (new Function('data', //IOutputRawData
                 configurationObject.operationConfiguration.outputMap)).bind(this) as TOutput
         }
     }
