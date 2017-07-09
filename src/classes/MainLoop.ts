@@ -15,6 +15,7 @@ import { transformToObjectFromCsvLineStream } from '../lib/transformToObjectFrom
 
 export class MainLoop {
     private outputResolver: (any) => void;
+    private completePromises: Promise<boolean>[] = [];
 
     constructor(
         private readStreams:ReadStream[],
@@ -43,9 +44,18 @@ export class MainLoop {
         if (readStreams.length > 0) {
             const rdStream:ReadStream = _.first(readStreams);
             const restOfReadStreams:ReadStream[] = _.slice(readStreams, 1);
+            let completionHook;
+            const completePromise = new Promise<boolean>((resolve, reject) => {
+                completionHook = () => {
+                    resolve(true);
+                }
+            });
+            this.completePromises.push(completePromise)
             rdStream.getStream().subscribe(data => {
                 this.recursiveLooper(_.extend({}, dataAccumulator, data), restOfReadStreams);
-            });
+            },
+            _ => {},
+            completionHook);
         } else {
             this.operationalConfiguration.calculationMap(dataAccumulator, (data) => {
                 this.outputResolver({
@@ -56,7 +66,8 @@ export class MainLoop {
         }
     }
 
-    start = () => {
+    start = ():Promise<boolean[]> => {
         this.recursiveLooper({}, this.readStreams);
+        return Promise.all(this.completePromises);
     }
 }

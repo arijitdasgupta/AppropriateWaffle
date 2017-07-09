@@ -11,6 +11,7 @@ export class ReadStream {
 
     constructor(private fileSpec:IVectorFileSpecification) {
         if (this.fileSpec.inMemory) {
+            console.log(`Loading ${this.fileSpec.filename} into memory`);
             this.loaded = new Promise((resolve, reject) => {
                 let loadCompleteHook = () => {
                     resolve(true);
