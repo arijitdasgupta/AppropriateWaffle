@@ -4,10 +4,10 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "outDir": "./dist/main.js",
+        "outDir": "./dist/",
         "target": "ES6"
     },
     "files": [
-        "src/index.ts"
+        "src/main.ts"
     ]
 }

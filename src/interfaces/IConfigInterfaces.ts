@@ -1,6 +1,9 @@
+import * as Rx from 'rxjs';
+
 export interface IVectorFileSpecification {
     filename: string;
     propsToTake: string[];
+    inMemory: boolean;
 }
 
 export interface IOutputSpecification {
@@ -25,6 +28,10 @@ export interface IOutKeyValPair {
 
 export interface IReadStreamData {
     fileSpecification: IVectorFileSpecification;
+}
+
+export interface IReadStream {
+    stream: Rx.Observable<any>
 }
 
 export type TOperationCallback = (data:any) => void;
